@@ -11,6 +11,7 @@
 #include "registers.h"
 #include "memory.h"
 #include "pin.h"
+#include "array.h"
 
 struct class_s *new(struct class_s *cls, ...);
 

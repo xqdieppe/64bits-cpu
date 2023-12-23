@@ -3,7 +3,7 @@
 
 #include "class.h"
 
-typedef struct array_s {
+typedef struct __attribute__((packed)) array_s {
 	struct class_s main;
 
 	struct class_s **array;

@@ -19,4 +19,6 @@ typedef struct gates_s {
 
 #define __exec__(self) ((self)->exec(self))
 
+extern struct gates_s *NAND;
+
 #endif

@@ -1,7 +1,7 @@
 #ifndef PIN_H
 #define PIN_H
 
-#define "class.h"
+#include "class.h"
 
 typedef struct pin_s {
 	struct class_s main;
@@ -11,5 +11,7 @@ typedef struct pin_s {
 	
 	void (*set)(struct pin_s *, unsigned char);
 }pin_t;
+
+extern struct class_s *PIN;
 
 #endif

@@ -2,11 +2,22 @@
 
 void array_constructor(struct class_s *self, va_list *args) {
 	struct array_s *self_ = (struct array_s *) self;
+
+	self_->array = NULL;
+	self_->push = array_push;
 }
 
 void array_destructor(struct class_s *self) {
 	struct array_s *self_ = (struct array_s *) self;
 	free(self);
+}
+
+void array_dump(struct class_s *self, size_t padding) {
+	struct array_s *self_ = (struct array_s *) self;
+	size_t s = __size__(self_);
+	
+	for (size_t i = 0; i < s; i++)
+		__dump__(self_->array[i]);
 }
 
 size_t array_size(struct array_s *self) {
@@ -16,18 +27,22 @@ size_t array_size(struct array_s *self) {
 	return (s);
 }
 
-void array_push(struct array_s *self, void *elem) {
+void array_push(struct array_s *self, struct class_s *elem) {
 	size_t s = __size__(self);
+	struct class_s **array = calloc(((struct class_s *) elem)->size, s + 2);
 
-	for (size_t i = 0; i < s; i++) {
-	
-	}
-	self->array
+	for (size_t i = 0; i < s; i++)
+		memcpy(array[i], self->array[i], ((struct class_s *) self->array[i])->size);
+	memcpy(array[i], elem, ((struct class_s *) elem)->size);
+	for (size_t i = 0; i < s; i++)
+		__destructor__(self->array[i]);
+	free(self->array);
+	self->array = array;
 }
 
 struct class_s ARRAY_CLASS = {
-	.constructor = &pin_constructor,
-	.destructor = &pin_destructor,
+	.constructor = &array_constructor,
+	.destructor = &array_destructor,
 	.size = sizeof(struct gates_s)
 };
 

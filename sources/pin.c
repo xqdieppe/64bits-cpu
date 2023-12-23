@@ -13,8 +13,7 @@ void pin_destructor(struct class_s *self) {
 
 void pin_dump(struct class_s *self, size_t padding) {
 	struct pin_s *self_ = (struct pin_s *) self;
-	printf("OK\n");
-	printf("elec: %d\n", self_->elec);
+	printf("[ electricity: %s ]\n", (self_->elec == 1) ? "true" : "false");
 }
 
 void pin_set(struct pin_s *self, unsigned char v) {

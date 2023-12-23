@@ -9,7 +9,7 @@ typedef struct __attribute__((packed)) pin_s {
 	unsigned char elec;
 	struct gates_s **gates;
 	
-	void (*set)(struct pin_s *, unsigned char);
+	void (*set_electricity)(struct pin_s *, unsigned char);
 }pin_t;
 
 extern struct class_s *PIN;

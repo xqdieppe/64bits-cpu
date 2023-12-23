@@ -14,6 +14,6 @@ typedef struct array_s {
 	void (*map)(struct array_s *, void (*)(struct class_s *, int, struct array_s *))
 }array_t;
 
-extern struct class_s *PIN;
+extern struct class_s *ARRAY;
 
 #endif

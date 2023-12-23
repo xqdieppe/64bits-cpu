@@ -20,4 +20,9 @@
 	ONE_BYTE_MEMORY(index##_0); \
 	ONE_BYTE_MEMORY(index##_1); \
 
+#define ONE_WORD_MEMORY(index) \
+	ONE_SHORT_MEMORY(index##_0); \
+	ONE_SHORT_MEMORY(index##_1); \
+
+
 #endif

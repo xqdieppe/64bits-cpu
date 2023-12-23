@@ -1,44 +1,22 @@
 #ifndef GATES_H
 #define GATES_H
 
+#include "class.h"
 #include "types.h"
 
-#define NAND(i0,i1,o) \
-	BIT(&o) = !(BIT(&i0)&BIT(&i1))
+typedef struct gates_s {
+	struct class_s main;
 
-#define NOR(i0,i1,o) { \
-	uint1_t b0,b1,b2; \
-	NAND(i0,i0,b0);NAND(i1,i1,b1); \
-	NAND(b0,b1,b2);NAND(b2,b2,o); \
-}
+	unsigned char *in0;
+	unsigned char *in1;
+	unsigned char *out;
 
-#define OR(i0,i1,o) { \
-	uint1_t b0,b1; \
-	NAND(i0,i0,b0);NAND(i1,i1,b1); \
-	NAND(b0,b1,o); \
-}
+	void (*set_in0)(struct gates_s *, unsigned char);
+	void (*set_in1)(struct gates_s *, unsigned char);
+	void (*set_out)(struct gates_s *, unsigned char);
+	void (*exec)(struct gates_s *);
+}gates_t;
 
-#define AND(i0,i1,o) { \
-	uint1_t b0,b1; \
-	NAND(i0,i1,b0);NAND(i0,i1,b1); \
-	NAND(b0,b1,o); \
-}
-
-#define NOT(i,o) \
-	NAND(i,i,o);
-
-
-#define GATE_TEST(gate, in0, in1) { \
-	uint1_t i0,i1,o; \
-	BIT(&i0)=in0;BIT(&i1)=in1;BIT(&o)=0; \
-	gate(i0,i1,o); \
-	printf("%s(%d,%d) = %d\n",#gate,BIT(&i0),BIT(&i1),BIT(&o)); \
-}
-
-#define GATE_TEST_FULL(gate) \
-	GATE_TEST(gate,0,0); \
-	GATE_TEST(gate,1,0); \
-	GATE_TEST(gate,0,1); \
-	GATE_TEST(gate,1,1); \
+#define __exec__(self) ((self)->exec(self))
 
 #endif

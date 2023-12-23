@@ -3,7 +3,7 @@
 
 #include "class.h"
 
-typedef struct pin_s {
+typedef struct __attribute__((packed)) pin_s {
 	struct class_s main;
 
 	unsigned char elec;

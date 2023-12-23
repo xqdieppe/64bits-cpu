@@ -14,5 +14,9 @@ int main(int argc, char **argv) {
 	//SET_FLIP_FLOP(s0,r0,q0,q_0);
 	//printf("%d,%d\n", q0, q1);
 	struct pin_s *in0 = (struct pin_s *) new(PIN, 1);
+	printf("%d\n = ", in0->elec);
+	printf("%p\n", (in0->main).constructor);
+	printf("%p\n", ((struct class_s *) in0)->constructor);
+	__dump__(in0, 0);
 	//struct gates_t *nand = (struct gates_s *) new(NAND, in0, in1, out);
 }
